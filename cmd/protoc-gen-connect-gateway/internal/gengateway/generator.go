@@ -172,6 +172,8 @@ func unexportedGoName(name string) string {
 
 // Raggedy comments in the generated code are driving me insane. This
 // word-wrapping function is ruinously inefficient, but it gets the job done.
+//
+// Source: https://github.com/bufbuild/connect-go/blob/main/cmd/protoc-gen-connect-go/main.go
 func wrapComments(g *protogen.GeneratedFile, elems ...any) {
 	text := &bytes.Buffer{}
 	for _, el := range elems {

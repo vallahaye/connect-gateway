@@ -2,6 +2,7 @@ package connectgateway
 
 import "github.com/bufbuild/connect-go"
 
+// Source: https://github.com/bufbuild/connect-go/blob/main/interceptor.go
 type chain struct {
 	interceptors []connect.Interceptor
 }

@@ -11,9 +11,10 @@ We provide a complete solution for the two to communicate seamlessly through sim
 
 ## Features
 
-- [Connect interceptors](https://connect.build/docs/go/interceptors) support
-- Bi-directional [gRPC metadata](https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md) transmission
-- [Connect errors](https://connect.build/docs/go/errors) to [gRPC errors](https://github.com/grpc/grpc-go/blob/master/Documentation/rpc-errors.md) convertion
+- Unary calls support
+- Connect interceptors support
+- Bidirectional gRPC metadata transmission
+- Connect errors to gRPC errors convertion
 
 ## Limitations
 
@@ -23,10 +24,3 @@ We provide a complete solution for the two to communicate seamlessly through sim
 ## Example
 
 Please refer to the [example/](https://github.com/vallahaye/connect-gateway/tree/main/example) directory for a basic example of how to integrate the Connect-Gateway into your project.
-
-## Credit
-
-Some codes were copied pasted from the [connect-go](https://github.com/bufbuild/connect-go) code base, in particular:
-
-- The `HandlerOption` system with its interceptor chaining capability
-- The `wrapComments` utility function in the code generator
