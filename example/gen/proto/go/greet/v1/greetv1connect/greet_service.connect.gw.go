@@ -22,7 +22,7 @@ type GreetServiceGatewayServer struct {
 // service.
 func NewGreetServiceGatewayServer(svc GreetServiceHandler, opts ...connect_gateway.HandlerOption) *GreetServiceGatewayServer {
 	return &GreetServiceGatewayServer{
-		greet: connect_gateway.NewUnaryHandler("/greet.v1.GreetService/Greet", svc.Greet, opts...),
+		greet: connect_gateway.NewUnaryHandler(GreetServiceGreetProcedure, svc.Greet, opts...),
 	}
 }
 

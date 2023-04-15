@@ -102,9 +102,9 @@ func generateService(g *protogen.GeneratedFile, file *protogen.File, service *pr
 	g.P("return &", serviceGatewayServerGoName, "{")
 	for _, method := range service.Methods {
 		if isUnaryMethod(method) {
-			var procedureName = fmt.Sprintf("/%s.%s/%s", method.Parent.Desc.ParentFile().Package(), method.Parent.Desc.Name(), method.Desc.Name())
+			var procedureConstName = fmt.Sprintf("%s%sProcedure", method.Parent.GoName, method.GoName)
 			g.P(unexportedGoName(method.GoName), ": ",
-				connectGatewayPackage.Ident("NewUnaryHandler"), `("`, procedureName, `", svc.`, method.GoName, ", opts...),")
+				connectGatewayPackage.Ident("NewUnaryHandler"), "(", procedureConstName, ", svc.", method.GoName, ", opts...),")
 		}
 	}
 	g.P("}")
