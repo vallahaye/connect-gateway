@@ -3,7 +3,7 @@ module go.vallahaye.net/connect-gateway/example
 go 1.18
 
 require (
-	github.com/bufbuild/connect-go v1.6.0
+	github.com/bufbuild/connect-go v1.7.0
 	github.com/go-chi/chi/v5 v5.0.8
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.15.2
 	go.vallahaye.net/connect-gateway v0.0.0-00010101000000-000000000000
