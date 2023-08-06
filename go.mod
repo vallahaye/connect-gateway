@@ -3,7 +3,7 @@ module go.vallahaye.net/connect-gateway
 go 1.18
 
 require (
-	github.com/bufbuild/connect-go v1.10.0
+	connectrpc.com/connect v1.11.0
 	google.golang.org/grpc v1.57.0
 	google.golang.org/protobuf v1.31.0
 )

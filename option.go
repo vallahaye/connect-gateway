@@ -1,12 +1,12 @@
 package connectgateway
 
-import "github.com/bufbuild/connect-go"
+import "connectrpc.com/connect"
 
 type HandlerOption interface {
 	applyToHandler(*handlerConfig)
 }
 
-// Source: https://github.com/bufbuild/connect-go/blob/main/option.go
+// Source: https://connectrpc.com/connect/blob/main/option.go
 type interceptorsOption struct {
 	Interceptors []connect.Interceptor
 }

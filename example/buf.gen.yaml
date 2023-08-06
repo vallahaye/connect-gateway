@@ -21,7 +21,7 @@ plugins:
   - plugin: connect-go
     out: gen/proto/go
     opt: paths=source_relative
-    path: ["go", "run", "github.com/bufbuild/connect-go/cmd/protoc-gen-connect-go"]
+    path: ["go", "run", "connectrpc.com/connect/cmd/protoc-gen-connect-go"]
   - plugin: connect-gateway
     out: gen/proto/go
     opt: paths=source_relative

@@ -1,8 +1,8 @@
 package connectgateway
 
-import "github.com/bufbuild/connect-go"
+import "connectrpc.com/connect"
 
-// Source: https://github.com/bufbuild/connect-go/blob/main/interceptor.go
+// Source: https://connectrpc.com/connect/blob/main/interceptor.go
 type chain struct {
 	interceptors []connect.Interceptor
 }
