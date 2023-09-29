@@ -2,7 +2,11 @@ package connectgateway
 
 import (
 	"context"
+	"errors"
 	"fmt"
+
+	spb "google.golang.org/genproto/googleapis/rpc/status"
+	"google.golang.org/protobuf/types/known/anypb"
 
 	"connectrpc.com/connect"
 	"google.golang.org/grpc"
@@ -57,7 +61,22 @@ func NewUnaryHandler[Req, Res any](
 		}
 		untypedRes, err := untypedUnary(ctx, req)
 		if err != nil {
-			return nil, status.Error(codes.Code(connect.CodeOf(err)), err.Error())
+			var perr *connect.Error
+			if !errors.As(err, &perr) {
+				return nil, status.Error(codes.Code(connect.CodeOf(err)), err.Error())
+			}
+			st := &spb.Status{
+				Code:    int32(perr.Code()),
+				Message: perr.Message(),
+			}
+			for _, detail := range perr.Details() {
+				anyDetail := &anypb.Any{
+					TypeUrl: detail.Type(),
+					Value:   detail.Bytes(),
+				}
+				st.Details = append(st.Details, anyDetail)
+			}
+			return nil, status.ErrorProto(st)
 		}
 		res, ok := untypedRes.(*connect.Response[Res])
 		if !ok {
