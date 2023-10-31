@@ -6,9 +6,10 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-func metadataFromHeader(in http.Header) (out metadata.MD) {
-	for k, v := range in {
-		out.Set(k, v...)
+func metadataFromHeader(in http.Header) metadata.MD {
+	out := metadata.New(nil)
+	for k, vals := range in {
+		out.Set(k, vals...)
 	}
-	return
+	return out
 }
