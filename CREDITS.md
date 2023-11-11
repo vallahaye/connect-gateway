@@ -5,6 +5,9 @@
 - **Valentin Lahaye** ([@vallahaye](https://github.com/vallahaye))<br/>
   *Original author of the Connect-Gateway*
 
+- **Johannes Brüderl** ([@birdayz](https://github.com/birdayz))<br/>
+  *Fixed some major issues when integrating the Connect-Gateway into [Redpanda Console](https://github.com/redpanda-data/console) ([PR#26](https://github.com/vallahaye/connect-gateway/pull/26), [PR#31](https://github.com/vallahaye/connect-gateway/pull/31))*
+
 - **Emile Friot** ([@emileFRT](https://github.com/emileFRT))<br/>
   *Helped refining the idea and tested several implementations*
 
