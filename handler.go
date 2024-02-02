@@ -65,6 +65,11 @@ func NewUnaryHandler[Req, Res any](
 			if !errors.As(err, &perr) {
 				return nil, status.Error(codes.Code(connect.CodeOf(err)), err.Error())
 			}
+			if h := perr.Meta(); len(h) > 0 {
+				if err := grpc.SendHeader(ctx, metadataFromHeader(h)); err != nil {
+					return nil, err
+				}
+			}
 			st := &spb.Status{
 				Code:    int32(perr.Code()),
 				Message: perr.Message(),
