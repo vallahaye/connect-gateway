@@ -1,11 +1,12 @@
 package connectgateway
 
 import (
+	"maps"
 	"net/http"
+	"slices"
 	"testing"
 
 	"google.golang.org/grpc/metadata"
-	"gotest.tools/v3/assert"
 )
 
 func TestMetadataFromHeader(t *testing.T) {
@@ -15,46 +16,58 @@ func TestMetadataFromHeader(t *testing.T) {
 		want metadata.MD
 	}{
 		{
-			"empty header",
-			make(http.Header),
-			metadata.New(nil),
+			name: "empty header",
+			in:   makeEmptyHeader(),
+			want: makeEmptyMetadata(),
 		},
 		{
-			"non-empty header",
-			nonEmptyHeader(),
-			nonEmptyMetadata(),
+			name: "non-empty header",
+			in:   makeNonEmptyHeader(),
+			want: makeNonEmptyMetadata(),
 		},
 		{
-			"non-empty header with duplicates",
-			nonEmptyHeaderWithDuplicates(),
-			nonEmptyMetadataWithDuplicates(),
+			name: "non-empty header with duplicates",
+			in:   makeNonEmptyHeaderWithDuplicates(),
+			want: makeNonEmptyMetadataWithDuplicates(),
 		},
 	} {
 		t.Run(params.name, func(t *testing.T) {
 			got := metadataFromHeader(params.in)
-			assert.DeepEqual(t, params.want, got)
+			if !maps.EqualFunc(got, params.want, slices.Equal) {
+				t.Errorf("unexpected metadata: got %v, want %v", got, params.want)
+			}
 		})
 	}
 }
 
-func nonEmptyHeader() http.Header {
-	h := make(http.Header)
+func makeEmptyHeader() http.Header {
+	return make(http.Header)
+}
+
+func makeNonEmptyHeader() http.Header {
+	h := makeEmptyHeader()
 	h.Set("ETag", "123-a")
 	return h
 }
 
-func nonEmptyHeaderWithDuplicates() http.Header {
-	h := nonEmptyHeader()
+func makeNonEmptyHeaderWithDuplicates() http.Header {
+	h := makeNonEmptyHeader()
 	h.Add("ETag", "123-b")
 	return h
 }
 
-func nonEmptyMetadata() metadata.MD {
-	return metadata.New(map[string]string{"ETag": "123-a"})
+func makeEmptyMetadata() metadata.MD {
+	return metadata.New(nil)
 }
 
-func nonEmptyMetadataWithDuplicates() metadata.MD {
-	md := nonEmptyMetadata()
+func makeNonEmptyMetadata() metadata.MD {
+	md := makeEmptyMetadata()
+	md.Set("ETag", "123-a")
+	return md
+}
+
+func makeNonEmptyMetadataWithDuplicates() metadata.MD {
+	md := makeNonEmptyMetadata()
 	md.Append("ETag", "123-b")
 	return md
 }
