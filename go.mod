@@ -3,7 +3,7 @@ module go.vallahaye.net/connect-gateway
 go 1.21
 
 require (
-	connectrpc.com/connect v1.16.2
+	connectrpc.com/connect v1.17.0
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240604185151-ef581f913117
 	google.golang.org/grpc v1.66.2
 	google.golang.org/protobuf v1.34.2
